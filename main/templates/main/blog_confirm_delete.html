@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    {% if blog.author.id != user.id %}
+        {{ blog.not_allowed }}
+    {% endif %}
+
+    <h1>Deleting Article</h1>
+
+    <p>Are you sure you want to delete: <b>{{ blog.title }}</b>?</p>
+
+    <form action="" method="POST">
+        {% csrf_token %}
+        <input class="btn" type="submit" value="Delete" style="margin-left: 60px">
+    </form>
+    <form action="{% url 'blog-detail' blog.id %}" style="margin-top: -33.5px">
+        <input class="btn" type="submit" value="Back" />
+    </form>
+{% endblock %}

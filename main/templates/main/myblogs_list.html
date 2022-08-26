@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>My blogs</h1>
+    <hr>
+    {% if myblogs %}
+        <ul>
+        {% for myblog in myblogs %}
+                <li><a href="{{ myblog.get_absolute_url }}">{{ myblog.title }}</a>({{ myblog.data }})</li>
+                <p>{{ myblog.text| slice:":200" }}... <a href="{{ myblog.get_absolute_url }}">Read all</a></p>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p><strong>You haven't created any post yet</strong></p>
+    {% endif %}
+{% endblock %}

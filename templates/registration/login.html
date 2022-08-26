@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% if form.errors %}
+    <p>Your username and password did not match. Try again</p>
+{% endif %}
+
+{% if next %}
+    {% if user.is_authenticated %}
+        <p>Your account doesn't have access to this page</p>
+    {% else %}
+        <p>Please login to see this page</p>
+    {% endif %}
+{% endif %}
+
+{% if user.is_authenticated %}
+    <h1 style="margin-top: 20px">You are authenticated!</h1>
+{% else %}
+<div class="container py-5">
+    <h1><strong>Sign in</strong></h1>
+        <br>
+    <form method="post" action="{% url 'login' %}">
+    {% csrf_token %}
+    {% for f in form %}
+        <p><label class="form-label" for="{{ f.id_for_label }}">{{ f.label }}: </label>{{ f }}</p>
+        <div class="form-error">{{ f.errors }}</div>
+    {% endfor %}
+
+        <button class="btn btn-primary" type="submit">Login</button>
+        <input type="hidden" name="next" value="{{ next }}" />
+    </form>
+    <br>
+    {# Assumes you setup the password_reset view in your URLconf #}
+    <p><a href="{% url 'password_reset' %}">Lost password?</a></p>
+    <p>Do not have an account yet? <a href="{% url 'register' %}">Register</a></p>
+</div>
+{% endif %}
+{% endblock %}

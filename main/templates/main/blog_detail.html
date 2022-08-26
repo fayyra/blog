@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>{{ blog.title }}</h1>
+    <p><b>Author: {{ blog.author }}</b></p>
+    <p><em>{{ blog.data }}</em></p>
+    <hr>
+    <div style="margin-top:20px">
+    {% load static %}
+        <img src="{{ blog.picture.url }}" alt="home" width="780" height="420"/>
+    </div>
+    <div style="margin-top:20px; margin-right:100px">
+        <p>{{ blog.text|linebreaks }}</p>
+        {% if blog.author.id == user.id %}
+            <form action="{% url 'blog-delete' blog.id %}">
+                <input class="btn" type="submit" value="Delete" style="margin-top: 20px; margin-left: 60px" />
+            </form>
+            <form action="{% url 'blog-update' blog.id %}" style="margin-top: -34px">
+                <input class="btn" type="submit" value="Edit">
+            </form>
+        {% endif %}
+    </div>
+    <hr>
+    <h3>Comments:</h3>
+    {% if user.is_authenticated %}
+        <form action="{% url 'comment-create' blog.id %}" method="post" style="margin-top: 20px">
+            {% csrf_token %}
+            <p><strong>User: {{ user.get_username }}</strong></p>
+            {{ comment_form.text }}
+            <br/>
+            <input class="btn" type="submit" value="Publish" />
+        </form>
+    <hr>
+    {% else %}
+        <p><strong><a href="{% url 'login' %}">Login</a> or <a href="{% url 'register' %}">Register</a> to write comment</strong></p>
+    {% endif %}
+    <div style="margin-top: 20px">
+    {% if not blog.comments.all %}
+        No Comments Yet...
+    {% else %}
+        {% for comment in blog.comments.all %}
+                <div class="comments" style="padding: 10px">
+                    <p class="font-weight-bold">
+                        <strong>{{ comment.author }}</strong>
+                        <span class="text-muted font-weight-normal">
+                            {{ comment.data }}
+                        </span>
+                    </p>
+                    {{ comment.text|linebreaks }}
+                </div>
+        {% endfor %}
+    {% endif %}
+    </div>
+{% endblock %}

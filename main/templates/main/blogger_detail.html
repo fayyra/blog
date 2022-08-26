@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1><strong>Profile</strong></h1>
+    <p><strong>Name: </strong><label class="form-control">{% if profile.user.first_name %} {{ profile.user.first_name }} {% else %} not set... {% endif %}</label></p>
+    <p><strong>Surname: </strong><label class="form-control">{% if profile.user.last_name %} {{ profile.user.last_name }} {% else %} not set... {% endif %}</label></p>
+    <p><strong>Username: </strong><label class="form-control">{% if profile.user.username %} {{ profile.user.username }} {% else %} not set... {% endif %}</label></p>
+    <p><strong>Date of Birth: </strong><label class="form-control">{% if profile.birth %} {{ profile.birth }} {% else %} not set... {% endif %}</label></p>
+    <p><strong>About {% if profile.user.id == user.id %}myself{% else %}{{ profile.user.username }}{% endif %}:</strong><label class="form-control">{% if profile.bio %} {{ profile.bio }} {% else %} not set...{% endif %}</label></p>
+    <br>
+    {% if profile.user.id == user.id %}
+        <form action="{% url 'profile-edit' %}">
+            <button class="btn">Edit</button>
+        </form>
+    {% endif %}
+{% endblock %}

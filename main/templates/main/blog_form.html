@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+<form enctype="multipart/form-data" action="" method="post" style="margin-top: 20px">
+    {% if blog.author.id != user.id %}
+    {{ blog.not_allowed }}
+    {% endif %}
+    {% csrf_token %}
+    {% for f in form %}
+        <p><label class="form-label" for="{{ f.id_for_label }}">{{ f.label }}: </label>{{ f }}</p>
+        <div class="form-error">{{ f.errors }}</div>
+    {% endfor %}
+
+<input class="btn" type="submit" value="Publish" style="margin-top: 20px; margin-left: 60px" />
+</form>
+<form action="{% if blog.id %} {% url 'blog-detail' blog.id %} {% else %} {% url 'index' %} {% endif %}"  style="margin-top: -34px">
+    <input class="btn" type="submit" value="Back" />
+</form>
+
+
+{% endblock %}

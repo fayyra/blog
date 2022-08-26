@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>About MyBlog</h1>
+
+    <p>Welcome to <b><em>MyBlog</em></b>. Here you can share pictures and articles about yourself and not only</p>
+<h2>Content:</h2>
+
+    <ul>
+    <li><strong>Total number of articles:</strong> {{ num_blogs }}</li>
+    <li><strong>Total number of users:</strong> {{ user_count }}</li>
+    </ul>
+{% endblock %}
