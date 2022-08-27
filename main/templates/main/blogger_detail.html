@@ -9,8 +9,8 @@
     <p><strong>About {% if profile.user.id == user.id %}myself{% else %}{{ profile.user.username }}{% endif %}:</strong><label class="form-control">{% if profile.bio %} {{ profile.bio }} {% else %} not set...{% endif %}</label></p>
     <br>
     {% if profile.user.id == user.id %}
-        <form action="{% url 'profile-edit' %}">
-            <button class="btn">Edit</button>
-        </form>
+        <div class="text-end">
+            <a href="{% url 'profile-edit' %}" class="btn btn-dark">Edit</a>
+        </div>
     {% endif %}
 {% endblock %}

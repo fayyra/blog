@@ -1,7 +1,10 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<p>Logged out!</p>
-
-<a href="{% url 'login' %}">Login again</a>
+<h1 style="margin-top: 20px">You have logged out!</h1>
+<br>
+<div class="d-grid gap-2 d-md-block">
+  <a href="{% url 'login' %}" class="btn btn-dark">Login</a>
+  <a href="{% url 'register' %}" class="btn btn-dark">Register</a>
+</div>
 {% endblock %}

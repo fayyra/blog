@@ -4,12 +4,22 @@
     <h1>My blogs</h1>
     <hr>
     {% if myblogs %}
-        <ul>
         {% for myblog in myblogs %}
-                <li><a href="{{ myblog.get_absolute_url }}">{{ myblog.title }}</a>({{ myblog.data }})</li>
-                <p>{{ myblog.text| slice:":200" }}... <a href="{{ myblog.get_absolute_url }}">Read all</a></p>
+            <div class="card" style="width: 56em;">
+                <div class="card-header">
+                    Published: <em>{{ myblog.data }}</em>
+                </div>
+              <div class="card-body">
+                <h5 class="card-title">{{ myblog.title }}</h5>
+                <h6 class="card-subtitle mb-2 text-muted"><a href="{% url 'profile' myblog.author.profile.id %}">{{ myblog.author }}</a></h6>
+                <p class="card-text">{{ myblog.text| slice:":200" }}...</p>
+                <div class="text-end">
+                    <a href="{{ myblog.get_absolute_url }}" class="btn btn-dark btn-sm">Read all</a>
+                </div>
+              </div>
+            </div>
+            <br>
         {% endfor %}
-        </ul>
     {% else %}
         <p><strong>You haven't created any post yet</strong></p>
     {% endif %}

@@ -5,12 +5,22 @@
     <h1>All blogs</h1>
     <hr>
     {% if blogs_list %}
-        <ul>
         {% for blog in blogs_list %}
-            <li><a href="{{ blog.get_absolute_url }}">{{ blog.title }}</a><em>({{ blog.data }})</em> - <strong>By <a href="{% url 'profile' blog.author.profile.id %}">{{ blog.author }}</a></strong></li>
-            <p>{{ blog.text| slice:":200" }}... <a href="{{ blog.get_absolute_url }}">Read all</a></p>
+            <div class="card" style="width: 56em;">
+                <div class="card-header">
+                    Published: <em>{{ blog.data }}</em>
+                </div>
+              <div class="card-body">
+                <h5 class="card-title">{{ blog.title }}</h5>
+                <h6 class="card-subtitle mb-2 text-muted"><a href="{% url 'profile' blog.author.profile.id %}">{{ blog.author }}</a></h6>
+                <p class="card-text">{{ blog.text| slice:":200" }}...</p>
+                <div class="text-end">
+                <a href="{{ blog.get_absolute_url }}" class="btn btn-dark btn-sm">Read all</a>
+                </div>
+              </div>
+            </div>
+            <br>
         {% endfor %}
-        </ul>
     {% else %}
         <p>There are no blogs yet</p>
     {% endif %}

@@ -16,13 +16,13 @@
                 <div class="form-error">{{ f.errors }}</div>
             {% endfor %}
 
-
-
             <br>
-            <button class="btn btn-secondary" style="margin-left: 60px">Save</button>
+            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+              <button class="btn btn-dark">Save</button>
+              <a href="{% url 'profile' user.profile.id %}" class="btn btn-dark">Back</a>
+            </div>
         </form>
-        <form action="{% url 'profile' user.profile.id %}" style="margin-top: -34px">
-        <button class="btn">Back</button>
-    </form>
+
     </div>
+    <br>
 {% endblock %}

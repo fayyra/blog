@@ -12,10 +12,10 @@
         <div class="form-error">{{ f.errors }}</div>
     {% endfor %}
 
-<input class="btn" type="submit" value="Publish" style="margin-top: 20px; margin-left: 60px" />
-</form>
-<form action="{% if blog.id %} {% url 'blog-detail' blog.id %} {% else %} {% url 'index' %} {% endif %}"  style="margin-top: -34px">
-    <input class="btn" type="submit" value="Back" />
+<div class="d-grid gap-2 d-md-flex justify-content-md-end">
+  <a href="{% if blog.id %} {% url 'blog-detail' blog.id %} {% else %} {% url 'index' %} {% endif %}" class="btn btn-dark">Back</a>
+  <input class="btn btn-dark" type="submit" value="Publish" />
+</div>
 </form>
 
 

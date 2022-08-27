@@ -4,49 +4,48 @@
     {% block title %}<title>My Blog</title>{% endblock %}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    {% load static %}
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>    {% load static %}
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 </head>
 <body>
     <div class="container-fluid">
         <div class="row">
-            <div class="col-sm-2">
+            <div class="col-sm-auto">
                 {% block sidebar %}
-                <ul class="sidebar-nav">
-                    <li><a href="{% url 'index' %}">Home</a></li>
-                    <li><a href="{% url 'blogs' %}">All blogs</a></li>
+                <ul class="sidebar-nav" style="margin-top: 30px">
+                    <li class="navbar-brand" style="margin-left: 14px"><a href="{% url 'index' %}">Home</a></li>
+                    <li class="nav-item active"><a class="nav-link" href="{% url 'blogs' %}">All blogs</a></li>
                 </ul>
-                <hr>
+                    <hr>
                 <ul class="sidebar-nav">
                     {% if user.is_authenticated %}
-                        <li>User: <a href="{% url 'profile' user.profile.id %}">{{ user.username }}</a></li>
-                        <li><a href="{% url 'logout' %}">Logout</a></li>
-                        <li><a href="{% url 'myblog_list' %}">My blogs</a></li>
-                        <li><a href="{% url 'blog-create' %}">Create blog</a></li>
+                        <li class="nav-item active" style="margin-left: 14px">User: <a href="{% url 'profile' user.profile.id %}">{{ user.username }}</a></li>
+                        <li class="nav-item active"><a class="nav-link" href="{% url 'logout' %}">Logout</a></li>
+                        <li class="nav-item active"><a class="nav-link" href="{% url 'myblog_list' %}">My blogs</a></li>
+                        <li class="nav-item active"><a class="nav-link" href="{% url 'blog-create' %}">Create blog</a></li>
                     {% else %}
-                        <li><a href="{% url 'login' %}">Login</a></li>
-                        <li><a href="{% url 'register' %}">Register</a></li>
+                        <li class="nav-item active"><a class="nav-link" href="{% url 'login' %}">Login</a></li>
+                        <li class="nav-item active"><a class="nav-link" href="{% url 'register' %}">Register</a></li>
                     {% endif %}
                 </ul>
                 {% endblock %}
             </div>
-            <div class="col-sm-10">
+            <div class="col-sm-7" style="margin-top: 30px; margin-left: 60px">
                 {% block content %}{% endblock %}
                 {% block pagination %}
                     {% if is_paginated %}
                         <div class="pagination">
                             <span class="page-links">
                                 {% if page_obj.has_previous %}
-                                    <a href="{{ request.path }}?page={{ page_obj.previous_page_number }}">previous</a>
+                                    <a href="{{ request.path }}?page={{ page_obj.previous_page_number }}" class="btn btn-dark btn-sm">previous</a>
                                 {% endif %}
                                 <span class="page-current">
-                                    Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+                                    {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
                                 </span>
                                 {% if page_obj.has_next %}
-                                    <a href="{{ request.path }}?page={{ page_obj.next_page_number }}">next</a>
+                                    <a href="{{ request.path }}?page={{ page_obj.next_page_number }}" class="btn btn-dark btn-sm">next</a>
                                 {% endif %}
                             </span>
                         </div>

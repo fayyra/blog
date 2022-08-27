@@ -11,9 +11,11 @@
                 <div class="form-error">{{ f.errors }}</div>
             {% endfor %}
 
+        <div class="text-end">
             <button class="btn btn-primary" type="submit">Register</button>
+        </div>
         </form>
-        <p class="text-right">If you already have an account, <a href="{% url 'login' %}">LOGIN</a> instead</p>
+        <p class="text-end">If you already have an account, <a href="{% url 'login' %}">LOGIN</a> instead</p>
     </div>
 
 {% endblock %}

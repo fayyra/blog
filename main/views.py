@@ -23,7 +23,7 @@ def index(request):
 
 class BlogsListView(generic.ListView):
     model = Blog
-    paginate_by = 10
+    paginate_by = 5
     context_object_name = 'blogs_list'
 
 

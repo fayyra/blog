@@ -6,14 +6,12 @@ from main.models import Blog, Comment, Profile
 
 class BlogCreateForm(forms.ModelForm):
     title = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
+    picture = forms.ImageField(widget=forms.FileInput(attrs={'class': 'form-control'}))
+    text = forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control'}))
 
     class Meta:
         model = Blog
         exclude = ['author']
-
-        widgets = {
-            'text': forms.Textarea(attrs={'class': 'form-control'}),
-        }
 
 
 class BlogUpdateForm(forms.ModelForm):
@@ -27,13 +25,11 @@ class BlogUpdateForm(forms.ModelForm):
 
 
 class CommentForm(forms.ModelForm):
+    text = forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control'}))
+
     class Meta:
         model = Comment
         fields = ('text',)
-
-        widgets = {
-            'text': forms.Textarea(attrs={'class': 'form-control'}),
-        }
 
 
 class SignUpForm(UserCreationForm):
