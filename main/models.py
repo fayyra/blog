@@ -15,7 +15,7 @@ class Blog(models.Model):
         return self.author
 
     class Meta:
-        ordering = ['data']
+        ordering = ['-data']
 
     def get_absolute_url(self):
         return reverse('blog-detail', args=[str(self.id)])

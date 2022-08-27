@@ -17,7 +17,7 @@
 {% if user.is_authenticated %}
     <h1>You are authenticated!</h1>
 {% else %}
-<div class="container py-5">
+<div class="container py-auto">
     <h1><strong>Sign in</strong></h1>
         <br>
     <form method="post" action="{% url 'login' %}">
