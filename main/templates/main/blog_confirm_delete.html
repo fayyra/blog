@@ -14,7 +14,7 @@
     <form action="" method="POST">
         {% csrf_token %}
         <div class="d-grid gap-2 d-md-block">
-            <a href="{% url 'login' %}" class="btn btn-dark">Back</a>
+            <a href="{% url 'blog-detail' blog.id %}" class="btn btn-dark">Back</a>
             <input class="btn btn-dark" type="submit" value="Delete">
         </div>
     </form>

@@ -6,6 +6,7 @@
     {% if blog.author.id != user.id %}
     {{ blog.not_allowed }}
     {% endif %}
+    <h1>{% if not blog %}Blog creation{% else %}Edit blog{% endif %}</h1>
     {% csrf_token %}
     {% for f in form %}
         <p><label class="form-label" for="{{ f.id_for_label }}">{{ f.label }}: </label>{{ f }}</p>
